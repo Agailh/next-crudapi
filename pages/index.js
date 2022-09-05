@@ -28,6 +28,10 @@ const Home = () => {
     postsClone[index] = { ...post };
     setPosts(postsClone);
   };
+  const handleDelete = async (post) => {
+    await axios.delete(apiEndPoint + "/" + post.id + post);
+    setPosts(posts.filter((p) => p.id !== post.id));
+  };
 
   return (
     <>
@@ -51,11 +55,14 @@ const Home = () => {
                 <td>
                   <button onClick={() => handleUpdate(posts)} className="btn btn-info btn-sm ">
                     {" "}
-                    Update{" "}
+                    Update
                   </button>
                 </td>
                 <td>
-                  <button className="btn btn-danger btn-sm "> Delete </button>
+                  <button onClick={() => handleDelete(posts)} className="btn btn-danger btn-sm ">
+                    {" "}
+                    Delete{" "}
+                  </button>
                 </td>
               </tr>
             ))}
